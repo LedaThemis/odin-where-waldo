@@ -20,7 +20,7 @@ const SelectionPopup = ({ x, y, availableSelections, currentSelection, setCurren
         defaultValue={currentSelection}
         onChange={(e) => setCurrentSelection(e.target.value)}
       >
-        <option value={''} disabled></option>
+        <option value={''}></option>
         {getAvailableOptions(availableSelections)}
       </select>
       <button id="selection--popup--submit" type="button" onClick={submitSelection}>

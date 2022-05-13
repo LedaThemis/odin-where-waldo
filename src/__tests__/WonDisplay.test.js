@@ -28,7 +28,7 @@ describe('test should reload page on click', () => {
   it('calls window.location.reload if clicked', () => {
     render(<WonDisplay seconds={0} />);
 
-    const refreshPageButton = screen.getByText('Refresh Page');
+    const refreshPageButton = screen.getByRole('button', /refresh/i);
 
     userEvent.click(refreshPageButton);
 

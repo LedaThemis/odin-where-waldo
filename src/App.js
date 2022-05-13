@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import './styles/App.css';
+
 import Display from './components/Display';
 import Header from './components/Header';
 import Status from './components/Status';
@@ -10,6 +12,7 @@ import whereWaldoImage from './assets/where-waldo-1.jpeg';
 
 import { fetchPositionsFromDB } from './helpers/db';
 import { checkSelection, getSelection } from './helpers/utils';
+import Timer from './components/Timer';
 
 const App = () => {
   const [currentCoordinates, setCurrentCoordinates] = useState({ x: 0, y: 0 });
@@ -23,6 +26,10 @@ const App = () => {
 
   const [isDisplayingStatus, setIsDisplayingStatus] = useState(false);
   const [statusText, setStatusText] = useState('');
+
+  const [isStarted, setIsStarted] = useState(false);
+
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -61,7 +68,10 @@ const App = () => {
     <div className="App">
       {isDisplayingStatus && <Status text={statusText} />}
 
-      <Header />
+      <div id="header-with-timer">
+        <Header isStarted={isStarted} />
+        <Timer seconds={seconds} setSeconds={setSeconds} isStarted={isStarted} />
+      </div>
 
       {isPopupActive && (
         <SelectionPopup
@@ -85,6 +95,8 @@ const App = () => {
         setCurrentCoordinates={setCurrentCoordinates}
         setMouseCoordinates={setMouseCoordinates}
         setIsPopupActive={setIsPopupActive}
+        isStarted={isStarted}
+        setIsStarted={setIsStarted}
       />
     </div>
   );

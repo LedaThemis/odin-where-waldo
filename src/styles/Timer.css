@@ -1,0 +1,12 @@
+#timer {
+  position: absolute;
+  right: 1rem;
+  text-align: center;
+  color: #f7f0f5;
+
+  font-size: 2rem;
+}
+
+#timer--text {
+  margin: 0;
+}

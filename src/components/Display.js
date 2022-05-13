@@ -1,7 +1,7 @@
 import { convertPositionToPercentage } from '../helpers/utils';
 import '../styles/Display.css';
 
-const Display = ({ imageObject, setCurrentCoordinates, setMouseCoordinates, correctSelections }) => {
+const Display = ({ imageObject, setCurrentCoordinates, setMouseCoordinates, setIsPopupActive }) => {
   const getCoordinates = (e) => {
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -18,6 +18,7 @@ const Display = ({ imageObject, setCurrentCoordinates, setMouseCoordinates, corr
     const { percentageX, percentageY, mouseX, mouseY } = getCoordinates(e);
     setCurrentCoordinates({ x: percentageX, y: percentageY });
     setMouseCoordinates({ x: mouseX, y: mouseY });
+    setIsPopupActive(true);
   };
 
   return (

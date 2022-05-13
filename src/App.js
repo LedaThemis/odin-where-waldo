@@ -14,7 +14,7 @@ import { checkSelection, getSelection } from './helpers/utils';
 const App = () => {
   const [currentCoordinates, setCurrentCoordinates] = useState({ x: 0, y: 0 });
   const [mouseCoordinates, setMouseCoordinates] = useState({ x: 0, y: 0 });
-  const [isPopupActive, setIsPopupActive] = useState(true);
+  const [isPopupActive, setIsPopupActive] = useState(false);
 
   const [positionsData, setPositionsData] = useState([]);
   const [availableSelections, setAvailableSelections] = useState([]);
@@ -84,6 +84,7 @@ const App = () => {
         imageObject={whereWaldoImage}
         setCurrentCoordinates={setCurrentCoordinates}
         setMouseCoordinates={setMouseCoordinates}
+        setIsPopupActive={setIsPopupActive}
       />
     </div>
   );

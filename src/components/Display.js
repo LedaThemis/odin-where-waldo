@@ -1,3 +1,4 @@
+import { convertPositionToPercentage } from '../helpers/utils';
 import '../styles/Display.css';
 
 const Display = ({ imageObject, setCurrentCoordinates }) => {
@@ -8,9 +9,7 @@ const Display = ({ imageObject, setCurrentCoordinates }) => {
     const width = rect.width;
     const height = rect.height;
 
-    // Multiplying by 100 to get percentage, and the other for 2 decimal points
-    const percentageX = Math.round((x / width) * 100 * 100) / 100;
-    const percentageY = Math.round((y / height) * 100 * 100) / 100;
+    const { percentageX, percentageY } = convertPositionToPercentage(x, y, width, height);
 
     return { percentageX, percentageY };
   };

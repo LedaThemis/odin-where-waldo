@@ -77,7 +77,7 @@ const App = () => {
   };
 
   const checkIfWon = (availableSelections) => {
-    return availableSelections.length === 9;
+    return availableSelections.length === 0;
   };
 
   const handleWin = () => {

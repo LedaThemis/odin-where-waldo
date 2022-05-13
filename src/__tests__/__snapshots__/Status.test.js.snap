@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div
+  id="status"
+>
+  <h3
+    id="status--text"
+  >
+    Sample Text
+  </h3>
+</div>
+`;

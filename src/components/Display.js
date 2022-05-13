@@ -1,7 +1,14 @@
 import { convertPositionToPercentage } from '../helpers/utils';
 import '../styles/Display.css';
 
-const Display = ({ imageObject, setCurrentCoordinates, setMouseCoordinates, setIsPopupActive }) => {
+const Display = ({
+  imageObject,
+  setCurrentCoordinates,
+  setMouseCoordinates,
+  setIsPopupActive,
+  isStarted,
+  setIsStarted,
+}) => {
   const getCoordinates = (e) => {
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -19,6 +26,11 @@ const Display = ({ imageObject, setCurrentCoordinates, setMouseCoordinates, setI
     setCurrentCoordinates({ x: percentageX, y: percentageY });
     setMouseCoordinates({ x: mouseX, y: mouseY });
     setIsPopupActive(true);
+
+    if (!isStarted) {
+      // start game on first click
+      setIsStarted(true);
+    }
   };
 
   return (

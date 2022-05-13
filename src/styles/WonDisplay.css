@@ -1,0 +1,25 @@
+#won--display {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background-color: #394053;
+  color: #f7f0f5;
+
+  padding: 2rem;
+  border-radius: 1rem;
+
+  z-index: 1;
+}
+
+#won--display--button {
+  border: none;
+  background-color: grey;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: #f7f0f5;
+  font-family: Poppins, sans-serif;
+  cursor: pointer;
+}

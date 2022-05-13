@@ -49,4 +49,8 @@ const checkSelection = (positionsData, currentSelection, currentCoordinates) => 
   );
 };
 
-export { convertPositionToPercentage, getSelection, checkSelection };
+const getHumanReadableTime = (seconds) => {
+  return new Date(seconds * 1000).toISOString().substr(11, 8);
+};
+
+export { convertPositionToPercentage, getSelection, checkSelection, getHumanReadableTime };

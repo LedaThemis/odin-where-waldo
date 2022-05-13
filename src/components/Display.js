@@ -12,15 +12,18 @@ const Display = ({ imageObject, setCurrentCoordinates }) => {
     const percentageX = Math.round((x / width) * 100 * 100) / 100;
     const percentageY = Math.round((y / height) * 100 * 100) / 100;
 
-    console.log(`X ${Math.round(x)}, Y ${Math.round(y)}`);
-    console.log(`Width ${Math.round(width)}, Height ${Math.round(height)}`);
-    console.log(`%X ${percentageX}, %Y ${percentageY}`);
+    return { percentageX, percentageY };
+  };
+
+  const handleImageClick = (e) => {
+    const { percentageX, percentageY } = getCoordinates(e);
+    setCurrentCoordinates({ x: percentageX, y: percentageY });
   };
 
   return (
     <div id="image--display">
       <div id="image--container">
-        <img onClick={getCoordinates} id="where--waldo--image" src={imageObject} alt="spot waldo" />
+        <img onClick={handleImageClick} id="where--waldo--image" src={imageObject} alt="spot waldo" />
       </div>
     </div>
   );

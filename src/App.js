@@ -14,7 +14,7 @@ import WonDisplay from './components/WonDisplay';
 import whereWaldoImage from './assets/where-waldo-1.jpeg';
 
 import { fetchPositionsFromDB } from './helpers/db';
-import { checkSelection, getSelection, getHumanReadableTime } from './helpers/utils';
+import { checkSelection, getSelection } from './helpers/utils';
 
 const App = () => {
   const [currentCoordinates, setCurrentCoordinates] = useState({ x: 0, y: 0 });

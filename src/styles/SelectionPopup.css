@@ -14,12 +14,15 @@
 
 #selection--popup--title {
   margin: 0;
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
 }
 
 #selection--popup--submit {
   cursor: pointer;
+  font-family: Poppins, sans-serif;
 }
 
-#selection--popup--select::focus {
-  border: none;
+#selection--popup--select {
+  font-family: Poppins, sans-serif;
 }

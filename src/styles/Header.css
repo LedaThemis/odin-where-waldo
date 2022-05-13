@@ -1,7 +1,18 @@
 #header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #394053;
-    color: #F7F0F5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #394053;
+  color: #f7f0f5;
+
+  padding: 1rem 0;
+}
+
+#header--title {
+  margin: 0;
+}
+
+#header--notice {
+  margin: 0;
 }

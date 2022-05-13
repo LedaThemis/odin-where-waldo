@@ -1,0 +1,25 @@
+#selection--popup {
+  position: absolute;
+  width: fit-content;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+
+  border-radius: 1rem 1rem 1rem 0;
+
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#selection--popup--title {
+  margin: 0;
+}
+
+#selection--popup--submit {
+  cursor: pointer;
+}
+
+#selection--popup--select::focus {
+  border: none;
+}

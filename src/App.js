@@ -16,7 +16,7 @@ const App = () => {
 
   const [positionsData, setPositionsData] = useState([]);
   const [availableSelections, setAvailableSelections] = useState([]);
-  const [currentSelection, setCurrentSelection] = useState('binoculars');
+  const [currentSelection, setCurrentSelection] = useState('');
   const [correctSelections, setCorrectSelections] = useState([]);
 
   useEffect(() => {

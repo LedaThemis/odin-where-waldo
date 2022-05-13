@@ -1,13 +1,15 @@
+import { useEffect, useState } from 'react';
+
 import Display from './components/Display';
 import Header from './components/Header';
+import Status from './components/Status';
+import SelectionPopup from './components/SelectionPopup';
+import Marker from './components/Marker';
+
 import whereWaldoImage from './assets/where-waldo-1.jpeg';
-import { useEffect, useState } from 'react';
 
 import { fetchPositionsFromDB } from './helpers/db';
 import { checkSelection, getSelection } from './helpers/utils';
-
-import SelectionPopup from './components/SelectionPopup';
-import Marker from './components/Marker';
 
 const App = () => {
   const [currentCoordinates, setCurrentCoordinates] = useState({ x: 0, y: 0 });
@@ -18,6 +20,9 @@ const App = () => {
   const [availableSelections, setAvailableSelections] = useState([]);
   const [currentSelection, setCurrentSelection] = useState('');
   const [correctSelections, setCorrectSelections] = useState([]);
+
+  const [isDisplayingStatus, setIsDisplayingStatus] = useState(false);
+  const [statusText, setStatusText] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -32,20 +37,32 @@ const App = () => {
     setAvailableSelections(availableSelections.filter((selection) => selection.id !== correctSelection));
   };
 
-  const submitSelection = () => {
-    if (checkSelection(positionsData, currentSelection, currentCoordinates)) {
-      const selection = getSelection(positionsData, currentSelection);
+  const displayStatus = (ms) => {
+    setIsDisplayingStatus(true);
+    setTimeout(() => {
+      setIsDisplayingStatus(false);
+    }, ms);
+  };
 
+  const submitSelection = () => {
+    if (currentSelection !== '' && checkSelection(positionsData, currentSelection, currentCoordinates)) {
+      const selection = getSelection(positionsData, currentSelection);
       markSelectionCorrect(currentSelection, mouseCoordinates.x, mouseCoordinates.y);
-      console.log(`Correct! You found ${selection.name}!`);
+      setCurrentSelection('');
+      setStatusText(`Correct! You found ${selection.name}!`);
+      displayStatus(1500);
     } else {
-      console.log('Wrong!');
+      setStatusText('Wrong!');
+      displayStatus(1500);
     }
   };
 
   return (
     <div className="App">
+      {isDisplayingStatus && <Status text={statusText} />}
+
       <Header />
+
       {isPopupActive && (
         <SelectionPopup
           x={mouseCoordinates.x}
@@ -56,10 +73,13 @@ const App = () => {
           submitSelection={submitSelection}
         />
       )}
+
       {isPopupActive && <Marker x={mouseCoordinates.x} y={mouseCoordinates.y} />}
+
       {correctSelections.map(({ id, mouseX, mouseY }) => (
         <Marker key={id} x={mouseX} y={mouseY} />
       ))}
+
       <Display
         imageObject={whereWaldoImage}
         setCurrentCoordinates={setCurrentCoordinates}

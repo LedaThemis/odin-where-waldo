@@ -1,0 +1,20 @@
+#status {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  padding: 1rem 4rem;
+
+  text-align: center;
+  border-radius: 1rem;
+
+  background-color: #759aab;
+  color: white;
+
+  width: 20rem;
+}
+
+#status--text {
+  margin: 0;
+}

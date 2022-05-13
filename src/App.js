@@ -45,7 +45,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(availableSelections);
+    if (positionsData.length === 0) return;
     if (checkIfWon(availableSelections)) {
       handleWin();
     }

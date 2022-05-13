@@ -4,9 +4,10 @@ import whereWaldoImage from './assets/where-waldo-1.jpeg';
 import { useEffect, useState } from 'react';
 
 import { fetchPositionsFromDB } from './helpers/db';
-import { checkSelection } from './helpers/utils';
+import { checkSelection, getSelection } from './helpers/utils';
 
 import SelectionPopup from './components/SelectionPopup';
+import Marker from './components/Marker';
 
 const App = () => {
   const [currentCoordinates, setCurrentCoordinates] = useState({ x: 0, y: 0 });
@@ -26,15 +27,17 @@ const App = () => {
     })();
   }, []);
 
-  const markSelectionCorrect = (correctSelection) => {
-    setCorrectSelections(correctSelections.concat(correctSelection));
+  const markSelectionCorrect = (correctSelection, mouseX, mouseY) => {
+    setCorrectSelections(correctSelections.concat({ mouseX, mouseY, id: correctSelection }));
     setAvailableSelections(availableSelections.filter((selection) => selection.id !== correctSelection));
   };
 
   const submitSelection = () => {
     if (checkSelection(positionsData, currentSelection, currentCoordinates)) {
-      markSelectionCorrect(currentSelection);
-      console.log(`Correct! You found ${currentSelection}!`);
+      const selection = getSelection(positionsData, currentSelection);
+
+      markSelectionCorrect(currentSelection, mouseCoordinates.x, mouseCoordinates.y);
+      console.log(`Correct! You found ${selection.name}!`);
     } else {
       console.log('Wrong!');
     }
@@ -53,6 +56,10 @@ const App = () => {
           submitSelection={submitSelection}
         />
       )}
+      {isPopupActive && <Marker x={mouseCoordinates.x} y={mouseCoordinates.y} />}
+      {correctSelections.map(({ id, mouseX, mouseY }) => (
+        <Marker key={id} x={mouseX} y={mouseY} />
+      ))}
       <Display
         imageObject={whereWaldoImage}
         setCurrentCoordinates={setCurrentCoordinates}

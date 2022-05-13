@@ -70,6 +70,8 @@ const App = () => {
       setCurrentSelection('');
       setStatusText(`Correct! You found ${selection.name}!`);
       displayStatus(1500);
+
+      setIsPopupActive(false);
     } else {
       setStatusText('Wrong!');
       displayStatus(1500);

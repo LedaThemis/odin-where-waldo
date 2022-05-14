@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import Timer from '../components/Timer';
 
 import { getHumanReadableTime } from '../helpers/utils';
+import * as utils from '../helpers/utils';
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -21,15 +22,18 @@ test('should display time correctly (uses helper)', () => {
   expect(screen.getByText(timeString)).toBeInTheDocument();
 });
 
-test('should not call setSeconds if isStarted is false', async () => {
-  const setSeconds = jest.fn();
-  render(<Timer seconds={0} setSeconds={setSeconds} isStarted={false} />);
+test('should call startTimer when isStarted is true', async () => {
+  const spySetTimer = jest.spyOn(utils, 'startTimer');
 
-  await waitFor(() => expect(setSeconds).toHaveBeenCalledTimes(0), { timeout: 1100 });
+  render(<Timer seconds={0} setSeconds={() => {}} isStarted={true} />);
+
+  await waitFor(() => expect(spySetTimer).toHaveBeenCalled());
 });
 
-test('should call setSeconds each second if isStarted is true', async () => {
-  const setSeconds = jest.fn(() => {});
-  render(<Timer seconds={0} setSeconds={setSeconds} isStarted={true} />);
-  await waitFor(() => expect(setSeconds).toHaveBeenCalledTimes(2), { timeout: 2100 });
+test('should not call startTimer when isStarted is false', async () => {
+  const spySetTimer = jest.spyOn(utils, 'startTimer');
+
+  render(<Timer seconds={0} setSeconds={() => {}} isStarted={false} />);
+
+  await waitFor(() => expect(spySetTimer).not.toHaveBeenCalled());
 });

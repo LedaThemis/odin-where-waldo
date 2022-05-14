@@ -8,18 +8,7 @@ import {
   exportedForTesting,
 } from '../utils';
 
-const { convertPositionToPercentage } = exportedForTesting;
-
-describe('test convertPositionToPercentage', () => {
-  const result = convertPositionToPercentage(10, 20, 22.5, 45);
-
-  it('returns correct number of positions', () => {
-    expect(Object.keys(result).length).toBe(2);
-  });
-  it('returns given position as percentage with 2 decimals precision', () => {
-    expect(result).toMatchObject({ percentageX: 44.44, percentageY: 44.44 });
-  });
-});
+const { convertPositionToPercentage, getBorderCoordinates } = exportedForTesting;
 
 describe('test getSelection', () => {
   it('should return undefined if selection does not exist', () => {
@@ -110,5 +99,22 @@ describe('test startTimer', () => {
 
     expect(setSeconds).toHaveBeenCalledTimes(2);
     expect(setSeconds).toHaveBeenCalledWith(expect.any(Function));
+  });
+});
+
+describe('test convertPositionToPercentage', () => {
+  const result = convertPositionToPercentage(10, 20, 22.5, 45);
+
+  it('returns correct number of positions', () => {
+    expect(Object.keys(result).length).toBe(2);
+  });
+  it('returns given position as percentage with 2 decimals precision', () => {
+    expect(result).toMatchObject({ percentageX: 44.44, percentageY: 44.44 });
+  });
+});
+
+describe('test getBorderCoordinates', () => {
+  it('should return correct values', () => {
+    expect(getBorderCoordinates(5, 7, 10, 13)).toMatchObject({ x1: 5, y1: 7, x2: 15, y2: 20 });
   });
 });

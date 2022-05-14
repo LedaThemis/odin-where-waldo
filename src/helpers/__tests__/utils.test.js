@@ -8,7 +8,7 @@ import {
   exportedForTesting,
 } from '../utils';
 
-const { convertPositionToPercentage, getBorderCoordinates } = exportedForTesting;
+const { convertPositionToPercentage, getBorderCoordinates, getProps } = exportedForTesting;
 
 describe('test getSelection', () => {
   it('should return undefined if selection does not exist', () => {
@@ -116,5 +116,12 @@ describe('test convertPositionToPercentage', () => {
 describe('test getBorderCoordinates', () => {
   it('should return correct values', () => {
     expect(getBorderCoordinates(5, 7, 10, 13)).toMatchObject({ x1: 5, y1: 7, x2: 15, y2: 20 });
+  });
+});
+
+describe('test getProps', () => {
+  it('should return props of provided positions data', () => {
+    const props = { id: 'props', imageHeight: 10, imageWidth: 12 };
+    expect(getProps([{ id: 1, name: '1' }, props])).toMatchObject(props);
   });
 });

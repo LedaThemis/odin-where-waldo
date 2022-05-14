@@ -25,8 +25,12 @@ const checkSelection = (positionsData, currentSelection, currentCoordinates) => 
   );
 };
 
-const getHumanReadableTime = (seconds) => {
-  return new Date(seconds * 1000).toISOString().substr(11, 8);
+const getHumanReadableTime = (secondsArg) => {
+  const hours = Math.floor(secondsArg / 3600);
+  const minutes = Math.floor(secondsArg / 60) % 60;
+  const seconds = secondsArg % 60;
+
+  return [hours, minutes, seconds].map((v) => (v < 10 ? '0' + v : v)).join(':');
 };
 
 const getAvailableOptions = (options) => {

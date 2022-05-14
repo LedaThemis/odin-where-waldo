@@ -88,12 +88,13 @@ const getOption = (name, value) => {
   );
 };
 
-export {
+export { getSelection, checkSelection, getHumanReadableTime, getAvailableOptions, getCoordinates, startTimer };
+
+export const exportedForTesting = {
   convertPositionToPercentage,
-  getSelection,
-  checkSelection,
-  getHumanReadableTime,
-  getAvailableOptions,
-  getCoordinates,
-  startTimer,
+  getBorderCoordinates,
+  getProps,
+  withinRange,
+  getCorrectBorderPositions,
+  getOption,
 };

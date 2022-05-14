@@ -1,12 +1,14 @@
 import {
-  convertPositionToPercentage,
   getSelection,
   checkSelection,
   getHumanReadableTime,
   getAvailableOptions,
   getCoordinates,
   startTimer,
+  exportedForTesting,
 } from '../utils';
+
+const { convertPositionToPercentage } = exportedForTesting;
 
 describe('test convertPositionToPercentage', () => {
   const result = convertPositionToPercentage(10, 20, 22.5, 45);

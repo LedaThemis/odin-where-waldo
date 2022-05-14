@@ -8,8 +8,14 @@ import {
   exportedForTesting,
 } from '../utils';
 
-const { convertPositionToPercentage, getBorderCoordinates, getProps, withinRange, getCorrectBorderPositions } =
-  exportedForTesting;
+const {
+  convertPositionToPercentage,
+  getBorderCoordinates,
+  getProps,
+  withinRange,
+  getCorrectBorderPositions,
+  getOption,
+} = exportedForTesting;
 
 describe('test getSelection', () => {
   it('should return undefined if selection does not exist', () => {
@@ -151,6 +157,19 @@ describe('test getCorrectBorderPositions', () => {
       percentageX2: 25,
       percentageY1: 5,
       percentageY2: 25,
+    });
+  });
+});
+
+describe('test getOption', () => {
+  it('should return option with correct key, value, innerText', () => {
+    const name = 'optionName';
+    const value = 'optionValue';
+
+    expect(getOption(name, value)).toMatchObject({
+      type: 'option',
+      key: `${value}-key`,
+      props: { value: value, children: name },
     });
   });
 });

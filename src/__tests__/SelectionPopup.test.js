@@ -1,7 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SelectionPopup from '../components/SelectionPopup';
 import userEvent from '@testing-library/user-event';
+
+import * as utils from '../helpers/utils';
 
 test('should render correct styles', () => {
   const x = 10;
@@ -113,4 +115,26 @@ test('should select option based on currentSelection value', () => {
 
   expect(screen.getByRole('option', { name: 'op1' }).selected).toBe(true);
   expect(screen.getByRole('option', { name: 'op2' }).selected).toBe(false);
+});
+
+test('should call getAvailableOptions with provided options', async () => {
+  const availableSelections = [
+    { name: 'op1', id: 'op1id' },
+    { name: 'op2', id: 'op2id' },
+  ];
+
+  const spyGetAvailableOptions = jest.spyOn(utils, 'getAvailableOptions');
+  render(
+    <SelectionPopup
+      x={1}
+      y={1}
+      availableSelections={availableSelections}
+      currentSelection={''}
+      setCurrentSelection={() => {}}
+      submitSelection={() => {}}
+    />
+  );
+
+  await waitFor(() => expect(spyGetAvailableOptions).toHaveBeenCalled());
+  expect(spyGetAvailableOptions).toHaveBeenCalledWith(availableSelections);
 });

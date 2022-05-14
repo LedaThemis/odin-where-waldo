@@ -5,6 +5,7 @@ import {
   getHumanReadableTime,
   getAvailableOptions,
   getCoordinates,
+  startTimer,
 } from '../utils';
 
 describe('test convertPositionToPercentage', () => {
@@ -94,5 +95,18 @@ describe('test getCoordinates', () => {
       pageY: 20,
     };
     expect(getCoordinates(event)).toMatchObject({ percentageX: 50, percentageY: 50, mouseX: 25, mouseY: 20 });
+  });
+});
+
+describe('test startTimer', () => {
+  it('should call setSeconds every second', async () => {
+    const setSeconds = jest.fn();
+    jest.useFakeTimers();
+    startTimer(setSeconds);
+
+    jest.advanceTimersByTime(2000);
+
+    expect(setSeconds).toHaveBeenCalledTimes(2);
+    expect(setSeconds).toHaveBeenCalledWith(expect.any(Function));
   });
 });

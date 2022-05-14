@@ -32,3 +32,33 @@ test('should call handleImageClick on click', () => {
 
   expect(spyHandleImageClick).toHaveBeenCalled();
 });
+
+test('should call handleImageClick with correct arguments', () => {
+  const spyHandleImageClick = jest.spyOn(handlers, 'handleImageClick');
+  const isStarted = true;
+  const setIsStarted = () => {};
+  const setCurrentCoordinates = () => {};
+  const setMouseCoordinates = () => {};
+  const setIsPopupActive = () => {};
+  render(
+    <Display
+      imageObject={'https://via.placeholder.com/1/1'}
+      isStarted={isStarted}
+      setIsStarted={setIsStarted}
+      setCurrentCoordinates={setCurrentCoordinates}
+      setMouseCoordinates={setMouseCoordinates}
+      setIsPopupActive={setIsPopupActive}
+    />
+  );
+
+  userEvent.click(screen.getByRole('img'));
+
+  expect(spyHandleImageClick).toHaveBeenCalledWith(
+    expect.any(Object),
+    isStarted,
+    setIsStarted,
+    setCurrentCoordinates,
+    setMouseCoordinates,
+    setIsPopupActive
+  );
+});

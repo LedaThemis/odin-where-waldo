@@ -1,4 +1,4 @@
-import { convertPositionToPercentage } from '../helpers/utils';
+import { getCoordinates } from '../helpers/utils';
 import '../styles/Display.css';
 
 const Display = ({
@@ -9,18 +9,6 @@ const Display = ({
   isStarted,
   setIsStarted,
 }) => {
-  const getCoordinates = (e) => {
-    const rect = e.target.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const width = rect.width;
-    const height = rect.height;
-
-    const { percentageX, percentageY } = convertPositionToPercentage(x, y, width, height);
-
-    return { percentageX, percentageY, mouseX: Math.round(e.pageX), mouseY: Math.round(e.pageY) };
-  };
-
   const handleImageClick = (e) => {
     const { percentageX, percentageY, mouseX, mouseY } = getCoordinates(e);
     setCurrentCoordinates({ x: percentageX, y: percentageY });

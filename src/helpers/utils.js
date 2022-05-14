@@ -64,4 +64,23 @@ const getAvailableOptions = (options) => {
   return options.map((option) => getOption(option.name, option.id));
 };
 
-export { convertPositionToPercentage, getSelection, checkSelection, getHumanReadableTime, getAvailableOptions };
+const getCoordinates = (e) => {
+  const rect = e.target.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const width = rect.width;
+  const height = rect.height;
+
+  const { percentageX, percentageY } = convertPositionToPercentage(x, y, width, height);
+
+  return { percentageX, percentageY, mouseX: Math.round(e.pageX), mouseY: Math.round(e.pageY) };
+};
+
+export {
+  convertPositionToPercentage,
+  getSelection,
+  checkSelection,
+  getHumanReadableTime,
+  getAvailableOptions,
+  getCoordinates,
+};

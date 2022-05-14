@@ -8,7 +8,7 @@ import {
   exportedForTesting,
 } from '../utils';
 
-const { convertPositionToPercentage, getBorderCoordinates, getProps } = exportedForTesting;
+const { convertPositionToPercentage, getBorderCoordinates, getProps, withinRange } = exportedForTesting;
 
 describe('test getSelection', () => {
   it('should return undefined if selection does not exist', () => {
@@ -123,5 +123,19 @@ describe('test getProps', () => {
   it('should return props of provided positions data', () => {
     const props = { id: 'props', imageHeight: 10, imageWidth: 12 };
     expect(getProps([{ id: 1, name: '1' }, props])).toMatchObject(props);
+  });
+});
+
+describe('test withinRange', () => {
+  it('should return false if outside range', () => {
+    expect(withinRange(1, 5, 7)).toBe(false);
+  });
+  it('should return true if inside range', () => {
+    expect(withinRange(1, 5, 2)).toBe(true);
+  });
+
+  it('should be inclusive', () => {
+    expect(withinRange(1, 5, 1)).toBe(true);
+    expect(withinRange(1, 5, 5)).toBe(true);
   });
 });

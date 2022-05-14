@@ -76,6 +76,12 @@ const getCoordinates = (e) => {
   return { percentageX, percentageY, mouseX: Math.round(e.pageX), mouseY: Math.round(e.pageY) };
 };
 
+const startTimer = (setSeconds) => {
+  return setInterval(() => {
+    setSeconds((prevSeconds) => prevSeconds + 1);
+  }, 1000);
+};
+
 export {
   convertPositionToPercentage,
   getSelection,
@@ -83,4 +89,5 @@ export {
   getHumanReadableTime,
   getAvailableOptions,
   getCoordinates,
+  startTimer,
 };

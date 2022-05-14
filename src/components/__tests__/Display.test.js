@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import Display from '../components/Display';
 
-import * as handlers from '../helpers/handlers';
+import Display from '../Display';
+import * as handlers from '../../helpers/handlers';
 
 test('should render image with provided source', () => {
   const imgSrc = 'sample/src';

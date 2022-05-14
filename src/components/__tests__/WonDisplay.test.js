@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import WonDisplay from '../components/WonDisplay';
-import { getHumanReadableTime } from '../helpers/utils';
 import userEvent from '@testing-library/user-event';
+
+import WonDisplay from '../WonDisplay';
+import { getHumanReadableTime } from '../../helpers/utils';
 
 test('should render time with text', () => {
   const seconds = 1240;

@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import rerenderer from 'react-test-renderer';
-import Marker from '../components/Marker';
+
+import Marker from '../Marker';
 
 test('should render correctly', () => {
   const tree = rerenderer.create(<Marker x={10} y={10} />).toJSON();

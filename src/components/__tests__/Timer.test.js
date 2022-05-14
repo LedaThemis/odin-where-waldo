@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Timer from '../components/Timer';
 
-import { getHumanReadableTime } from '../helpers/utils';
-import * as utils from '../helpers/utils';
+import Timer from '../Timer';
+import { getHumanReadableTime } from '../../helpers/utils';
+import * as utils from '../../helpers/utils';
 
 beforeEach(() => {
   jest.useFakeTimers();

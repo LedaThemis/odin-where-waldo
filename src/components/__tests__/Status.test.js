@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Status from '../components/Status';
 import rerenderer from 'react-test-renderer';
+
+import Status from '../Status';
 
 test('should render correctly', () => {
   const tree = rerenderer.create(<Status text={'Sample Text'} />).toJSON();

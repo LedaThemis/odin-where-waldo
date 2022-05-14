@@ -1,5 +1,6 @@
 import rerenderer from 'react-test-renderer';
-import Header from '../components/Header';
+
+import Header from '../Header';
 
 test('should render correctly', () => {
   const tree = rerenderer.create(<Header />).toJSON();

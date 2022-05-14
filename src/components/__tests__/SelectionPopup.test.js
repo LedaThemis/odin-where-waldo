@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import SelectionPopup from '../components/SelectionPopup';
 import userEvent from '@testing-library/user-event';
 
-import * as utils from '../helpers/utils';
+import SelectionPopup from '../SelectionPopup';
+import * as utils from '../../helpers/utils';
 
 test('should render correct styles', () => {
   const x = 10;

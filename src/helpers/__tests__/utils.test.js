@@ -1,4 +1,10 @@
-import { convertPositionToPercentage, getSelection, checkSelection, getHumanReadableTime } from '../utils';
+import {
+  convertPositionToPercentage,
+  getSelection,
+  checkSelection,
+  getHumanReadableTime,
+  getAvailableOptions,
+} from '../utils';
 
 describe('test convertPositionToPercentage', () => {
   const result = convertPositionToPercentage(10, 20, 22.5, 45);
@@ -60,5 +66,17 @@ describe('test getHumanReadableTime', () => {
 
   it('should display 100 hours correctly', () => {
     expect(getHumanReadableTime(360000)).toBe('100:00:00');
+  });
+});
+
+describe('test getAvailableOptions', () => {
+  it('should return option elements depending on provided argument', () => {
+    const options = [
+      { name: '1', id: '1' },
+      { name: '2', id: '2' },
+    ];
+
+    expect(getAvailableOptions(options)[0]).toMatchObject({ type: 'option' });
+    expect(getAvailableOptions(options)[1]).toMatchObject({ type: 'option' });
   });
 });

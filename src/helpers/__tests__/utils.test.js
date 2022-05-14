@@ -8,7 +8,8 @@ import {
   exportedForTesting,
 } from '../utils';
 
-const { convertPositionToPercentage, getBorderCoordinates, getProps, withinRange } = exportedForTesting;
+const { convertPositionToPercentage, getBorderCoordinates, getProps, withinRange, getCorrectBorderPositions } =
+  exportedForTesting;
 
 describe('test getSelection', () => {
   it('should return undefined if selection does not exist', () => {
@@ -137,5 +138,19 @@ describe('test withinRange', () => {
   it('should be inclusive', () => {
     expect(withinRange(1, 5, 1)).toBe(true);
     expect(withinRange(1, 5, 5)).toBe(true);
+  });
+});
+
+describe('test getCorrectBorderPositions', () => {
+  it('should return correct values', () => {
+    const selection = { x: 5, y: 5, width: 20, height: 20 };
+    const positionsData = [{ id: 'props', imageHeight: 100, imageWidth: 100 }];
+
+    expect(getCorrectBorderPositions(positionsData, selection)).toMatchObject({
+      percentageX1: 5,
+      percentageX2: 25,
+      percentageY1: 5,
+      percentageY2: 25,
+    });
   });
 });

@@ -1,17 +1,7 @@
 import '../styles/SelectionPopup.css';
+import { getAvailableOptions } from '../helpers/utils';
 
 const SelectionPopup = ({ x, y, availableSelections, currentSelection, setCurrentSelection, submitSelection }) => {
-  const getOption = (name, value) => {
-    return (
-      <option key={`${value}-key`} value={value}>
-        {name}
-      </option>
-    );
-  };
-  const getAvailableOptions = (options) => {
-    return options.map((option) => getOption(option.name, option.id));
-  };
-
   return (
     <div id="selection--popup" data-testid="selection--popup--div" style={{ top: y, left: x }}>
       <p id="selection--popup--title">Select what you found</p>

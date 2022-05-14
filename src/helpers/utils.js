@@ -53,4 +53,15 @@ const getHumanReadableTime = (seconds) => {
   return new Date(seconds * 1000).toISOString().substr(11, 8);
 };
 
-export { convertPositionToPercentage, getSelection, checkSelection, getHumanReadableTime };
+const getOption = (name, value) => {
+  return (
+    <option key={`${value}-key`} value={value}>
+      {name}
+    </option>
+  );
+};
+const getAvailableOptions = (options) => {
+  return options.map((option) => getOption(option.name, option.id));
+};
+
+export { convertPositionToPercentage, getSelection, checkSelection, getHumanReadableTime, getAvailableOptions };

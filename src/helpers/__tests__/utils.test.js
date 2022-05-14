@@ -17,7 +17,7 @@ const {
   getOption,
 } = exportedForTesting;
 
-describe('test getSelection', () => {
+describe('getSelection', () => {
   it('should return undefined if selection does not exist', () => {
     const result = getSelection([{ id: 0 }, { id: 1 }], 2);
 
@@ -32,7 +32,7 @@ describe('test getSelection', () => {
   });
 });
 
-describe('test checkSelection', () => {
+describe('checkSelection', () => {
   it('should return true if provided coordinates is within correct range', () => {
     const positionsData = [
       { id: 1, x: 0, y: 0, width: 5, height: 5 },
@@ -59,7 +59,7 @@ describe('test checkSelection', () => {
   });
 });
 
-describe('test getHumanReadableTime', () => {
+describe('getHumanReadableTime', () => {
   it('should display correct padding', () => {
     expect(getHumanReadableTime(0)).toBe('00:00:00');
   });
@@ -69,7 +69,7 @@ describe('test getHumanReadableTime', () => {
   });
 });
 
-describe('test getAvailableOptions', () => {
+describe('getAvailableOptions', () => {
   it('should return option elements depending on provided argument', () => {
     const options = [
       { name: '1', id: '1' },
@@ -81,7 +81,7 @@ describe('test getAvailableOptions', () => {
   });
 });
 
-describe('test getCoordinates', () => {
+describe('getCoordinates', () => {
   it('should return correct relative coordinates', () => {
     const event = {
       target: {
@@ -96,7 +96,7 @@ describe('test getCoordinates', () => {
   });
 });
 
-describe('test startTimer', () => {
+describe('startTimer', () => {
   it('should call setSeconds every second', async () => {
     const setSeconds = jest.fn();
     jest.useFakeTimers();
@@ -109,7 +109,7 @@ describe('test startTimer', () => {
   });
 });
 
-describe('test convertPositionToPercentage', () => {
+describe('convertPositionToPercentage', () => {
   const result = convertPositionToPercentage(10, 20, 22.5, 45);
 
   it('returns correct number of positions', () => {
@@ -120,20 +120,20 @@ describe('test convertPositionToPercentage', () => {
   });
 });
 
-describe('test getBorderCoordinates', () => {
+describe('getBorderCoordinates', () => {
   it('should return correct values', () => {
     expect(getBorderCoordinates(5, 7, 10, 13)).toMatchObject({ x1: 5, y1: 7, x2: 15, y2: 20 });
   });
 });
 
-describe('test getProps', () => {
+describe('getProps', () => {
   it('should return props of provided positions data', () => {
     const props = { id: 'props', imageHeight: 10, imageWidth: 12 };
     expect(getProps([{ id: 1, name: '1' }, props])).toMatchObject(props);
   });
 });
 
-describe('test withinRange', () => {
+describe('withinRange', () => {
   it('should return false if outside range', () => {
     expect(withinRange(1, 5, 7)).toBe(false);
   });
@@ -147,7 +147,7 @@ describe('test withinRange', () => {
   });
 });
 
-describe('test getCorrectBorderPositions', () => {
+describe('getCorrectBorderPositions', () => {
   it('should return correct values', () => {
     const selection = { x: 5, y: 5, width: 20, height: 20 };
     const positionsData = [{ id: 'props', imageHeight: 100, imageWidth: 100 }];
@@ -161,7 +161,7 @@ describe('test getCorrectBorderPositions', () => {
   });
 });
 
-describe('test getOption', () => {
+describe('getOption', () => {
   it('should return option with correct key, value, innerText', () => {
     const name = 'optionName';
     const value = 'optionValue';

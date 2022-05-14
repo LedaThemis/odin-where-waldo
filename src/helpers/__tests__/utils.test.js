@@ -4,6 +4,7 @@ import {
   checkSelection,
   getHumanReadableTime,
   getAvailableOptions,
+  getCoordinates,
 } from '../utils';
 
 describe('test convertPositionToPercentage', () => {
@@ -78,5 +79,20 @@ describe('test getAvailableOptions', () => {
 
     expect(getAvailableOptions(options)[0]).toMatchObject({ type: 'option' });
     expect(getAvailableOptions(options)[1]).toMatchObject({ type: 'option' });
+  });
+});
+
+describe('test getCoordinates', () => {
+  it('should return correct relative coordinates', () => {
+    const event = {
+      target: {
+        getBoundingClientRect: () => ({ left: 5, top: 5, width: 20, height: 10 }),
+      },
+      clientX: 15,
+      clientY: 10,
+      pageX: 25,
+      pageY: 20,
+    };
+    expect(getCoordinates(event)).toMatchObject({ percentageX: 50, percentageY: 50, mouseX: 25, mouseY: 20 });
   });
 });

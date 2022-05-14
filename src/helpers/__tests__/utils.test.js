@@ -1,4 +1,4 @@
-import { convertPositionToPercentage, getSelection, checkSelection } from '../utils';
+import { convertPositionToPercentage, getSelection, checkSelection, getHumanReadableTime } from '../utils';
 
 describe('test convertPositionToPercentage', () => {
   const result = convertPositionToPercentage(10, 20, 22.5, 45);
@@ -50,5 +50,15 @@ describe('test checkSelection', () => {
     const result = checkSelection(positionsData, currentSelection, currentCoordinates);
 
     expect(result).toBe(false);
+  });
+});
+
+describe('test getHumanReadableTime', () => {
+  it('should display correct padding', () => {
+    expect(getHumanReadableTime(0)).toBe('00:00:00');
+  });
+
+  it('should display 100 hours correctly', () => {
+    expect(getHumanReadableTime(360000)).toBe('100:00:00');
   });
 });

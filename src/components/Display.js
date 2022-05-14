@@ -1,4 +1,4 @@
-import { getCoordinates } from '../helpers/utils';
+import { handleImageClick } from '../helpers/handlers';
 import '../styles/Display.css';
 
 const Display = ({
@@ -9,22 +9,17 @@ const Display = ({
   isStarted,
   setIsStarted,
 }) => {
-  const handleImageClick = (e) => {
-    const { percentageX, percentageY, mouseX, mouseY } = getCoordinates(e);
-    setCurrentCoordinates({ x: percentageX, y: percentageY });
-    setMouseCoordinates({ x: mouseX, y: mouseY });
-    setIsPopupActive(true);
-
-    if (!isStarted) {
-      // start game on first click
-      setIsStarted(true);
-    }
-  };
-
   return (
     <div id="image--display">
       <div id="image--container">
-        <img onClick={handleImageClick} id="where--waldo--image" src={imageObject} alt="spot waldo" />
+        <img
+          onClick={(e) =>
+            handleImageClick(e, isStarted, setIsStarted, setCurrentCoordinates, setMouseCoordinates, setIsPopupActive)
+          }
+          id="where--waldo--image"
+          src={imageObject}
+          alt="spot waldo"
+        />
       </div>
     </div>
   );

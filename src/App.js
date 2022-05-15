@@ -14,7 +14,7 @@ import WonDisplay from './components/WonDisplay';
 import whereWaldoImage from './assets/where-waldo-1.jpeg';
 
 import { fetchPositionsFromDB } from './helpers/db';
-import { checkSelection, getSelection } from './helpers/utils';
+import { checkIfWon, handleWin, submitSelection } from './helpers/utils';
 
 const App = () => {
   const [currentCoordinates, setCurrentCoordinates] = useState({ x: 0, y: 0 });
@@ -47,46 +47,9 @@ const App = () => {
   useEffect(() => {
     if (positionsData.length === 0) return;
     if (checkIfWon(availableSelections)) {
-      handleWin();
+      handleWin(setIsPopupActive, setIsWon, setShowOverlay);
     }
   }, [availableSelections]);
-
-  const markSelectionCorrect = (correctSelection, mouseX, mouseY) => {
-    setCorrectSelections(correctSelections.concat({ mouseX, mouseY, id: correctSelection }));
-    setAvailableSelections(availableSelections.filter((selection) => selection.id !== correctSelection));
-  };
-
-  const displayStatus = (ms) => {
-    setIsDisplayingStatus(true);
-    setTimeout(() => {
-      setIsDisplayingStatus(false);
-    }, ms);
-  };
-
-  const submitSelection = () => {
-    if (currentSelection !== '' && checkSelection(positionsData, currentSelection, currentCoordinates)) {
-      const selection = getSelection(positionsData, currentSelection);
-      markSelectionCorrect(currentSelection, mouseCoordinates.x, mouseCoordinates.y);
-      setCurrentSelection('');
-      setStatusText(`Correct! You found ${selection.name}!`);
-      displayStatus(1500);
-
-      setIsPopupActive(false);
-    } else {
-      setStatusText('Wrong!');
-      displayStatus(1500);
-    }
-  };
-
-  const checkIfWon = (availableSelections) => {
-    return availableSelections.length === 0;
-  };
-
-  const handleWin = () => {
-    setIsPopupActive(false);
-    setIsWon(true);
-    setShowOverlay(true);
-  };
 
   return (
     <div className="App">
@@ -106,7 +69,20 @@ const App = () => {
           availableSelections={availableSelections}
           currentSelection={currentSelection}
           setCurrentSelection={setCurrentSelection}
-          submitSelection={submitSelection}
+          submitSelection={() =>
+            submitSelection(
+              positionsData,
+              currentSelection,
+              setCurrentCoordinates,
+              setCorrectSelections,
+              setAvailableSelections,
+              currentCoordinates,
+              mouseCoordinates,
+              setStatusText,
+              setIsPopupActive,
+              setIsDisplayingStatus
+            )
+          }
         />
       )}
 

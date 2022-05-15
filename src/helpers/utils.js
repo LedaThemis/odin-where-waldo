@@ -1,8 +1,43 @@
-const convertPositionToPercentage = (x, y, width, height) => {
-  const percentageX = Math.round((x / width) * 100 * 100) / 100;
-  const percentageY = Math.round((y / height) * 100 * 100) / 100;
+const submitSelection = (
+  positionsData,
+  currentSelection,
+  setCurrentSelection,
+  setCorrectSelections,
+  setAvailableSelections,
+  currentCoordinates,
+  mouseCoordinates,
+  setStatusText,
+  setIsPopupActive,
+  setIsDisplayingStatus
+) => {
+  if (currentSelection !== '' && checkSelection(positionsData, currentSelection, currentCoordinates)) {
+    const selection = getSelection(positionsData, currentSelection);
+    markSelectionCorrect(
+      currentSelection,
+      mouseCoordinates.x,
+      mouseCoordinates.y,
+      setCorrectSelections,
+      setAvailableSelections
+    );
+    setCurrentSelection('');
+    setStatusText(`Correct! You found ${selection.name}!`);
+    displayStatus(1500, setIsDisplayingStatus);
 
-  return { percentageX, percentageY };
+    setIsPopupActive(false);
+  } else {
+    setStatusText('Wrong!');
+    displayStatus(1500, setIsDisplayingStatus);
+  }
+};
+
+const checkIfWon = (availableSelections) => {
+  return availableSelections.length === 0;
+};
+
+const handleWin = (setIsPopupActive, setIsWon, setShowOverlay) => {
+  setIsPopupActive(false);
+  setIsWon(true);
+  setShowOverlay(true);
 };
 
 const getSelection = (positionsData, id) => {
@@ -56,6 +91,29 @@ const startTimer = (setSeconds) => {
 };
 
 // Helper helpers
+const markSelectionCorrect = (correctSelection, mouseX, mouseY, setCorrectSelections, setAvailableSelections) => {
+  setCorrectSelections((prevCorrectSelections) =>
+    prevCorrectSelections.concat({ mouseX, mouseY, id: correctSelection })
+  );
+  setAvailableSelections((prevAvailableSelections) =>
+    prevAvailableSelections.filter((selection) => selection.id !== correctSelection)
+  );
+};
+
+const displayStatus = (ms, setIsDisplayingStatus) => {
+  setIsDisplayingStatus(true);
+  setTimeout(() => {
+    setIsDisplayingStatus(false);
+  }, ms);
+};
+
+const convertPositionToPercentage = (x, y, width, height) => {
+  const percentageX = Math.round((x / width) * 100 * 100) / 100;
+  const percentageY = Math.round((y / height) * 100 * 100) / 100;
+
+  return { percentageX, percentageY };
+};
+
 const getBorderCoordinates = (x, y, width, height) => {
   return { x1: x, x2: x + width, y1: y, y2: y + height };
 };
@@ -88,9 +146,21 @@ const getOption = (name, value) => {
   );
 };
 
-export { getSelection, checkSelection, getHumanReadableTime, getAvailableOptions, getCoordinates, startTimer };
+export {
+  checkIfWon,
+  handleWin,
+  submitSelection,
+  getSelection,
+  checkSelection,
+  getHumanReadableTime,
+  getAvailableOptions,
+  getCoordinates,
+  startTimer,
+};
 
 export const exportedForTesting = {
+  markSelectionCorrect,
+  displayStatus,
   convertPositionToPercentage,
   getBorderCoordinates,
   getProps,

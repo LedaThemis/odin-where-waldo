@@ -146,6 +146,28 @@ describe('markSelectionCorrect', () => {
   });
 });
 
+describe('displayStatus', () => {
+  it('should call setIsDisplayingStatus with true', () => {
+    const setIsDisplayingStatus = jest.fn();
+
+    displayStatus(1000, setIsDisplayingStatus);
+
+    expect(setIsDisplayingStatus).toHaveBeenCalledWith(true);
+  });
+
+  it('should call setIsDisplayingStatus with false after provided delay', () => {
+    const setIsDisplayingStatus = jest.fn();
+
+    jest.useFakeTimers();
+
+    displayStatus(1500, setIsDisplayingStatus);
+
+    jest.advanceTimersByTime(1500);
+
+    expect(setIsDisplayingStatus).toHaveBeenCalledWith(false);
+  });
+});
+
 describe('getSelection', () => {
   it('should return undefined if selection does not exist', () => {
     const result = getSelection([{ id: 0 }, { id: 1 }], 2);

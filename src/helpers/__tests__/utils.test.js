@@ -32,6 +32,44 @@ describe('checkIfWon', () => {
   });
 });
 
+describe('handleWin', () => {
+  it('should call setIsPopupActive with false (hide Popup)', () => {
+    const setIsPopupActiveMock = jest.fn();
+
+    handleWin(
+      setIsPopupActiveMock,
+      () => {},
+      () => {}
+    );
+
+    expect(setIsPopupActiveMock).toHaveBeenCalledWith(false);
+  });
+
+  it('should call setIsWon with true', () => {
+    const setIsWonMock = jest.fn();
+
+    handleWin(
+      () => {},
+      setIsWonMock,
+      () => {}
+    );
+
+    expect(setIsWonMock).toHaveBeenCalledWith(true);
+  });
+
+  it('should call setShowOverlay with true (shows overlay)', () => {
+    const setShowOverlayMock = jest.fn();
+
+    handleWin(
+      () => {},
+      () => {},
+      setShowOverlayMock
+    );
+
+    expect(setShowOverlayMock).toHaveBeenCalledWith(true);
+  });
+});
+
 describe('getHumanReadableTime', () => {
   it('should display correct padding', () => {
     expect(getHumanReadableTime(0)).toBe('00:00:00');

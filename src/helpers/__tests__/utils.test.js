@@ -120,6 +120,32 @@ describe('startTimer', () => {
   });
 });
 
+describe('markSelectionCorrect', () => {
+  it('should call setCorrectSelections with callback', () => {
+    const correctSelection = 1;
+    const mouseX = 5;
+    const mouseY = 5;
+    const setCorrectSelections = jest.fn();
+    const setAvailableSelections = () => {};
+
+    markSelectionCorrect(correctSelection, mouseX, mouseY, setCorrectSelections, setAvailableSelections);
+
+    expect(setCorrectSelections).toHaveBeenCalledWith(expect.any(Function));
+  });
+
+  it('should call setAvailableSelections with callback', () => {
+    const correctSelection = 1;
+    const mouseX = 5;
+    const mouseY = 5;
+    const setCorrectSelections = () => {};
+    const setAvailableSelections = jest.fn();
+
+    markSelectionCorrect(correctSelection, mouseX, mouseY, setCorrectSelections, setAvailableSelections);
+
+    expect(setAvailableSelections).toHaveBeenCalledWith(expect.any(Function));
+  });
+});
+
 describe('getSelection', () => {
   it('should return undefined if selection does not exist', () => {
     const result = getSelection([{ id: 0 }, { id: 1 }], 2);

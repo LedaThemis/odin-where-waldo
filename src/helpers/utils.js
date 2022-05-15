@@ -150,8 +150,6 @@ export {
   checkIfWon,
   handleWin,
   submitSelection,
-  getSelection,
-  checkSelection,
   getHumanReadableTime,
   getAvailableOptions,
   getCoordinates,
@@ -161,6 +159,8 @@ export {
 export const exportedForTesting = {
   markSelectionCorrect,
   displayStatus,
+  getSelection,
+  checkSelection,
   convertPositionToPercentage,
   getBorderCoordinates,
   getProps,

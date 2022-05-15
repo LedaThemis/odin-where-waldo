@@ -70,6 +70,118 @@ describe('handleWin', () => {
   });
 });
 
+describe('submitSelection', () => {
+  it("should clear selection (set currentSelection to '') if selection is correct", () => {
+    const setCurrentSelectionMock = jest.fn();
+
+    submitSelection(
+      [
+        { id: 1, name: '1', x: 0, y: 0, width: 5, height: 5 },
+        { id: 'props', imageWidth: 10, imageHeight: 10 },
+      ],
+      1,
+      setCurrentSelectionMock,
+      () => {},
+      () => {},
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      () => {},
+      () => {},
+      () => {}
+    );
+
+    expect(setCurrentSelectionMock).toHaveBeenCalledWith('');
+  });
+
+  it('should call setStatusText with string containing selection name if selection is correct', () => {
+    const setStatusTextMock = jest.fn();
+
+    submitSelection(
+      [
+        { id: 1, name: 'selectionName', x: 0, y: 0, width: 5, height: 5 },
+        { id: 'props', imageWidth: 10, imageHeight: 10 },
+      ],
+      1,
+      () => {},
+      () => {},
+      () => {},
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      setStatusTextMock,
+      () => {},
+      () => {}
+    );
+
+    expect(setStatusTextMock).toHaveBeenCalledWith(expect.stringMatching(/selectionName/i));
+  });
+
+  it("should call setStatusText with string containing 'wrong' if selection is wrong", () => {
+    const setStatusTextMock = jest.fn();
+
+    submitSelection(
+      [
+        { id: 1, name: 'selectionName', x: 0, y: 0, width: 5, height: 5 },
+        { id: 'props', imageWidth: 10, imageHeight: 10 },
+      ],
+      1,
+      () => {},
+      () => {},
+      () => {},
+      { x: 80, y: 80 },
+      { x: 0, y: 0 },
+      setStatusTextMock,
+      () => {},
+      () => {}
+    );
+
+    expect(setStatusTextMock).toHaveBeenCalledWith(expect.stringMatching(/wrong/i));
+  });
+
+  it('should call setIsPopupActive with false if selection is correct (hide Popup)', () => {
+    const setIsPopupActiveMock = jest.fn();
+
+    submitSelection(
+      [
+        { id: 1, name: 'selectionName', x: 0, y: 0, width: 5, height: 5 },
+        { id: 'props', imageWidth: 10, imageHeight: 10 },
+      ],
+      1,
+      () => {},
+      () => {},
+      () => {},
+      { x: 0, y: 0 },
+      { x: 0, y: 0 },
+      () => {},
+      setIsPopupActiveMock,
+      () => {}
+    );
+
+    expect(setIsPopupActiveMock).toHaveBeenCalledWith(false);
+  });
+
+  it('should not call setIsPopupActive if selection is wrong (keep Popup shown)', () => {
+    const setIsPopupActiveMock = jest.fn();
+
+    submitSelection(
+      [
+        { id: 1, name: 'selectionName', x: 0, y: 0, width: 5, height: 5 },
+        { id: 'props', imageWidth: 10, imageHeight: 10 },
+      ],
+      1,
+      () => {},
+      () => {},
+      () => {},
+      { x: 80, y: 80 },
+      { x: 0, y: 0 },
+      () => {},
+      setIsPopupActiveMock,
+      () => {}
+    );
+
+    expect(setIsPopupActiveMock).not.toHaveBeenCalled();
+  });
+});
+
 describe('getHumanReadableTime', () => {
   it('should display correct padding', () => {
     expect(getHumanReadableTime(0)).toBe('00:00:00');

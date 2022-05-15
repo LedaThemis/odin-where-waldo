@@ -1,3 +1,13 @@
+const checkIfWon = (availableSelections) => {
+  return availableSelections.length === 0;
+};
+
+const handleWin = (setIsPopupActive, setIsWon, setShowOverlay) => {
+  setIsPopupActive(false);
+  setIsWon(true);
+  setShowOverlay(true);
+};
+
 const submitSelection = (
   positionsData,
   currentSelection,
@@ -28,16 +38,6 @@ const submitSelection = (
     setStatusText('Wrong!');
     displayStatus(1500, setIsDisplayingStatus);
   }
-};
-
-const checkIfWon = (availableSelections) => {
-  return availableSelections.length === 0;
-};
-
-const handleWin = (setIsPopupActive, setIsWon, setShowOverlay) => {
-  setIsPopupActive(false);
-  setIsWon(true);
-  setShowOverlay(true);
 };
 
 const getSelection = (positionsData, id) => {

@@ -1,6 +1,7 @@
 import {
-  getSelection,
-  checkSelection,
+  checkIfWon,
+  handleWin,
+  submitSelection,
   getHumanReadableTime,
   getAvailableOptions,
   getCoordinates,
@@ -9,6 +10,10 @@ import {
 } from '../utils';
 
 const {
+  markSelectionCorrect,
+  displayStatus,
+  getSelection,
+  checkSelection,
   convertPositionToPercentage,
   getBorderCoordinates,
   getProps,

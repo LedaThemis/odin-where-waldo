@@ -11,6 +11,7 @@ import Timer from './components/Timer';
 import Overlay from './components/Overlay';
 import WonDisplay from './components/WonDisplay';
 import NamePopup from './components/NamePopup';
+import Leaderboard from './components/Leaderboard';
 
 import whereWaldoImage from './assets/where-waldo-1.jpeg';
 
@@ -80,7 +81,8 @@ const App = () => {
 
       <div id="header-with-timer">
         <Header isStarted={isStarted} />
-        {!isWon && <Timer seconds={seconds} setSeconds={setSeconds} isStarted={isStarted} />}
+        {!isWon && !showOverlay && <Timer seconds={seconds} setSeconds={setSeconds} isStarted={isStarted} />}
+        {!isWon && !showOverlay && <Leaderboard leaderboardData={leaderboardData} />}
       </div>
 
       {isPopupActive && (

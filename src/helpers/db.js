@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDBZYLgpo3AmQfpoQ0ZpfKCa9vG9nrrb10',
@@ -13,10 +13,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const fetchPositionsFromDB = async (imageID) => {
+const fetchPositions = async (imageID) => {
   const snapshot = await getDocs(collection(db, imageID));
   const resultArray = [];
   snapshot.forEach((doc) => {
+    resultArray.push({ id: doc.id, ...doc.data() });
+  });
+
+  return resultArray;
+};
+
+const fetchLeaderboard = async () => {
+  const q = query(collection(db, 'leaderboard'), orderBy('seconds'), limit(10));
+  const querySnapshot = await getDocs(q);
+
+  const resultArray = [];
+
+  querySnapshot.forEach((doc) => {
     resultArray.push({ id: doc.id, ...doc.data() });
   });
 
@@ -32,4 +45,4 @@ const fetchPositionsFromDB = async (imageID) => {
 //   }
 // };
 
-export { fetchPositionsFromDB };
+export { fetchPositions, fetchLeaderboard };

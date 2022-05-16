@@ -14,7 +14,7 @@ import NamePopup from './components/NamePopup';
 
 import whereWaldoImage from './assets/where-waldo-1.jpeg';
 
-import { fetchPositions, fetchLeaderboard, addToLeaderboard } from './helpers/db';
+import { fetchPositions, fetchLeaderboard } from './helpers/db';
 import { checkIfWon, handleWin, submitSelection } from './helpers/utils';
 
 const App = () => {
@@ -61,7 +61,7 @@ const App = () => {
   useEffect(() => {
     if (positionsData.length === 0) return;
     if (checkIfWon(availableSelections)) {
-      handleWin(setIsPopupActive, setIsWon, setShowOverlay);
+      handleWin(setIsPopupActive, setIsWon, setShowOverlay, name, seconds);
     }
   }, [availableSelections]);
 

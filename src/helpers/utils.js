@@ -1,11 +1,14 @@
+import { addToLeaderboard } from './db';
+
 const checkIfWon = (availableSelections) => {
   return availableSelections.length === 0;
 };
 
-const handleWin = (setIsPopupActive, setIsWon, setShowOverlay) => {
+const handleWin = (setIsPopupActive, setIsWon, setShowOverlay, name, time) => {
   setIsPopupActive(false);
   setIsWon(true);
   setShowOverlay(true);
+  addToLeaderboard(name, time);
 };
 
 const submitSelection = (

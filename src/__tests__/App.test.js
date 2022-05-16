@@ -24,7 +24,9 @@ jest.mock('../components/WonDisplay', () => () => <div data-testid="won-display"
 jest.mock('../components/Overlay', () => () => <div data-testid="overlay"></div>);
 
 jest.mock('../helpers/db', () => ({
-  fetchPositionsFromDB: async () => [{ id: 'props', imageWidth: 100, imageHeight: 100 }],
+  fetchPositions: async () => [{ id: 'props', imageWidth: 100, imageHeight: 100 }],
+  fetchLeaderboard: async () => [{ id: '1', name: 'guy1', seconds: 10 }],
+  addToLeaderboard: async () => {},
 }));
 
 test('should render Header component', async () => {

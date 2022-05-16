@@ -1,3 +1,5 @@
+import { addToLeaderboard } from '../db';
+
 import {
   checkIfWon,
   handleWin,
@@ -23,7 +25,7 @@ const {
 } = exportedForTesting;
 
 jest.mock('../db', () => ({
-  addToLeaderboard: () => {},
+  addToLeaderboard: jest.fn(),
 }));
 
 describe('checkIfWon', () => {
@@ -71,6 +73,18 @@ describe('handleWin', () => {
     );
 
     expect(setShowOverlayMock).toHaveBeenCalledWith(true);
+  });
+
+  it('should call addToLeaderboard with correct arguments', () => {
+    handleWin(
+      () => {},
+      () => {},
+      () => {},
+      'username35',
+      24
+    );
+
+    expect(addToLeaderboard).toHaveBeenCalledWith('username35', 24);
   });
 });
 

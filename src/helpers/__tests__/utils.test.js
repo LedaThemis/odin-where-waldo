@@ -22,6 +22,10 @@ const {
   getOption,
 } = exportedForTesting;
 
+jest.mock('../db', () => ({
+  addToLeaderboard: () => {},
+}));
+
 describe('checkIfWon', () => {
   it('should return true if availableSelections is empty', () => {
     expect(checkIfWon([])).toBe(true);

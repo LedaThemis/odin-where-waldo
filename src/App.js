@@ -10,6 +10,7 @@ import Marker from './components/Marker';
 import Timer from './components/Timer';
 import Overlay from './components/Overlay';
 import WonDisplay from './components/WonDisplay';
+import NamePopup from './components/NamePopup';
 
 import whereWaldoImage from './assets/where-waldo-1.jpeg';
 
@@ -34,7 +35,10 @@ const App = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isWon, setIsWon] = useState(false);
 
-  const [showOverlay, setShowOverlay] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true);
+
+  const [isNameSubmitted, setIsNameSubmitted] = useState(false);
+  const [name, setName] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -51,10 +55,17 @@ const App = () => {
     }
   }, [availableSelections]);
 
+  const handleNameSubmit = (submittedName) => {
+    setName(submittedName);
+    setIsNameSubmitted(true);
+    setShowOverlay(false);
+  };
+
   return (
     <div className="App">
       {isDisplayingStatus && <Status text={statusText} />}
       {isWon && <WonDisplay seconds={seconds} />}
+      {!isNameSubmitted && <NamePopup handleNameSubmit={handleNameSubmit} />}
       {showOverlay && <Overlay />}
 
       <div id="header-with-timer">

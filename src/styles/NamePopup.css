@@ -31,6 +31,7 @@
 #name--popup--input {
   text-align: center;
   font-size: 1.5rem;
+  font-family: inherit;
 }
 
 #name--popup--label {

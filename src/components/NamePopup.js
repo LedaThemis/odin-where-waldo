@@ -16,7 +16,7 @@ const NamePopup = ({ handleNameSubmit }) => {
         onChange={(e) => setCurrentInput(e.target.value)}
         value={currentInput}
       ></input>
-      <button id="name--popup--button" data-testid="name-popup-button" onClick={() => handleNameSubmit(currentInput)}>
+      <button id="name--popup--button" onClick={() => handleNameSubmit(currentInput)}>
         Submit
       </button>
     </div>

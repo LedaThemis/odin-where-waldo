@@ -15,9 +15,7 @@ jest.mock('../components/Display', () => ({ setIsPopupActive }) => (
 ));
 jest.mock('../components/SelectionPopup', () => ({ submitSelection }) => (
   <div data-testid="selection-popup">
-    <button data-testid="selection-popup-button" onClick={submitSelection}>
-      Submit
-    </button>
+    <button onClick={submitSelection}>Submit</button>
   </div>
 ));
 jest.mock('../components/Marker', () => () => <div data-testid="marker"></div>);
@@ -60,9 +58,9 @@ test('should render SelectionPopup component with Marker component after click',
 test('should render Status component on submit button click', async () => {
   render(<App />);
 
-  userEvent.click(screen.getByTestId('name-popup-button'));
+  userEvent.click(screen.getByRole('button', { name: /submit/i }));
   userEvent.click(screen.getByTestId('display-component'));
-  userEvent.click(screen.getByTestId('selection-popup-button'));
+  userEvent.click(screen.getByRole('button', { name: /submit/i }));
 
   expect(await screen.findByTestId('status')).toBeVisible();
 });
@@ -70,9 +68,9 @@ test('should render Status component on submit button click', async () => {
 test('should render WonDisplay component and Overlay on win', async () => {
   render(<App />);
 
-  userEvent.click(screen.getByTestId('name-popup-button'));
+  userEvent.click(screen.getByRole('button', { name: /submit/i }));
   userEvent.click(screen.getByTestId('display-component'));
-  userEvent.click(screen.getByTestId('selection-popup-button'));
+  userEvent.click(screen.getByRole('button', { name: /submit/i }));
 
   expect(await screen.findByTestId('won-display')).toBeVisible();
   expect(await screen.findByTestId('overlay')).toBeVisible();

@@ -38,9 +38,17 @@ test('should render Header component', async () => {
 test('should render Timer component after name submit', async () => {
   render(<App />);
 
-  userEvent.click(screen.getByRole('button', /submit/i));
+  userEvent.click(screen.getByRole('button', { name: /submit/i }));
 
   expect(await screen.findByTestId('timer')).toBeVisible();
+});
+
+test('should render Leaderboard component after name submit', async () => {
+  render(<App />);
+
+  userEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+  expect(await screen.findByText('Leaderboard')).toBeVisible();
 });
 
 test('should render Display component', async () => {

@@ -35,8 +35,10 @@ test('should render Header component', async () => {
   expect(await screen.findByTestId('header')).toBeVisible();
 });
 
-test('should render Timer component', async () => {
+test('should render Timer component after name submit', async () => {
   render(<App />);
+
+  userEvent.click(screen.getByRole('button', /submit/i));
 
   expect(await screen.findByTestId('timer')).toBeVisible();
 });

@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query, orderBy, limit, addDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDBZYLgpo3AmQfpoQ0ZpfKCa9vG9nrrb10',
@@ -36,6 +36,10 @@ const fetchLeaderboard = async () => {
   return resultArray;
 };
 
+const addToLeaderboard = async (name, seconds) => {
+  await addDoc(collection(db, 'leaderboard'), { name: name, seconds: seconds });
+};
+
 // const writeDataToDB = async (imageID, data) => {
 //   for (let key of Object.keys(data)) {
 //     console.log(key);
@@ -45,4 +49,4 @@ const fetchLeaderboard = async () => {
 //   }
 // };
 
-export { fetchPositions, fetchLeaderboard };
+export { fetchPositions, fetchLeaderboard, addToLeaderboard };

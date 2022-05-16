@@ -30,4 +30,9 @@
 
 #name--popup--input {
   text-align: center;
+  font-size: 1.5rem;
+}
+
+#name--popup--label {
+  font-size: 1.5rem;
 }

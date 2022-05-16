@@ -14,7 +14,7 @@ import NamePopup from './components/NamePopup';
 
 import whereWaldoImage from './assets/where-waldo-1.jpeg';
 
-import { fetchPositionsFromDB } from './helpers/db';
+import { fetchPositions, fetchLeaderboard } from './helpers/db';
 import { checkIfWon, handleWin, submitSelection } from './helpers/utils';
 
 const App = () => {
@@ -40,13 +40,23 @@ const App = () => {
   const [isNameSubmitted, setIsNameSubmitted] = useState(false);
   const [name, setName] = useState('');
 
+  const [leaderboardData, setLeaderboardData] = useState([]);
+
   useEffect(() => {
     (async () => {
-      const fetchedPositions = await fetchPositionsFromDB('1');
+      const fetchedPositions = await fetchPositions('1');
       setPositionsData(fetchedPositions.sort((a, b) => a.name - b.name));
       setAvailableSelections(fetchedPositions.filter((pos) => pos.id !== 'props'));
     })();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedLeaderboard = await fetchLeaderboard();
+
+      setLeaderboardData(fetchedLeaderboard);
+    })();
+  });
 
   useEffect(() => {
     if (positionsData.length === 0) return;

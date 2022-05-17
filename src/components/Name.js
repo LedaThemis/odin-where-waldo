@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import '../styles/Name.css';
 
-const NamePopup = ({ handleNameSubmit, setIsLeaderboardPopupShown }) => {
+const Name = ({ handleNameSubmit, setIsLeaderboardPopupShown }) => {
   const [currentInput, setCurrentInput] = useState('');
   return (
     <div id="name--popup">
@@ -32,4 +32,4 @@ const NamePopup = ({ handleNameSubmit, setIsLeaderboardPopupShown }) => {
   );
 };
 
-export default NamePopup;
+export default Name;

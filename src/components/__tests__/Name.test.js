@@ -27,3 +27,13 @@ test('should call handleNameSubmit with correct value on submit button click', (
 
   expect(handleNameSubmitMock).toHaveBeenCalledWith('iamtypingtext');
 });
+
+test('should call setIsLeaderboardPopupShown with true on button click', () => {
+  const setIsLeaderboardPopupShown = jest.fn();
+
+  render(<Name handleNameSubmit={() => {}} setIsLeaderboardPopupShown={setIsLeaderboardPopupShown} />);
+
+  userEvent.click(screen.getByRole('button', { name: /leaderboard/i }));
+
+  expect(setIsLeaderboardPopupShown).toHaveBeenCalledWith(true);
+});

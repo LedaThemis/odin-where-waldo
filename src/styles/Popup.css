@@ -15,3 +15,19 @@
   width: fit-content;
   height: fit-content;
 }
+
+.close--popup--button {
+  background-color: transparent;
+  color: inherit;
+  border: none;
+
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+
+  position: absolute;
+  right: 0;
+  top: 0.25rem;
+
+  cursor: pointer;
+}

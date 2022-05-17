@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import '../styles/Name.css';
 
-const NamePopup = ({ handleNameSubmit }) => {
+const NamePopup = ({ handleNameSubmit, setIsLeaderboardPopupShown }) => {
   const [currentInput, setCurrentInput] = useState('');
   return (
     <div id="name--popup">
@@ -20,7 +20,11 @@ const NamePopup = ({ handleNameSubmit }) => {
         <button id="name--popup--button" className="button" onClick={() => handleNameSubmit(currentInput)}>
           Submit
         </button>
-        <button id="name--popup--leaderboard--button" className="button">
+        <button
+          id="name--popup--leaderboard--button"
+          className="button"
+          onClick={() => setIsLeaderboardPopupShown(true)}
+        >
           Leaderboard
         </button>
       </div>

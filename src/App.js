@@ -42,6 +42,8 @@ const App = () => {
   const [isNameSubmitted, setIsNameSubmitted] = useState(false);
   const [name, setName] = useState('');
 
+  const [isLeaderboardPopupShown, setIsLeaderboardPopupShown] = useState(false);
+
   useEffect(() => {
     (async () => {
       const fetchedPositions = await fetchPositions('1');
@@ -67,7 +69,21 @@ const App = () => {
     <div className="App">
       {isDisplayingStatus && <Status text={statusText} />}
       {isWon && <WonDisplay seconds={seconds} />}
-      {!isNameSubmitted && <Popup Component={<Name handleNameSubmit={handleNameSubmit} />} />}
+      {isLeaderboardPopupShown && (
+        <Popup
+          Component={<Leaderboard />}
+          withCloseButton={true}
+          closePopup={() => setIsLeaderboardPopupShown(false)}
+          styles={{ paddingBottom: '1rem', zIndex: 2 }}
+        />
+      )}
+      {!isNameSubmitted && (
+        <Popup
+          Component={
+            <Name handleNameSubmit={handleNameSubmit} setIsLeaderboardPopupShown={setIsLeaderboardPopupShown} />
+          }
+        />
+      )}
       {showOverlay && <Overlay />}
 
       <div id="header-container">

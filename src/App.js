@@ -10,8 +10,9 @@ import Marker from './components/Marker';
 import Timer from './components/Timer';
 import Overlay from './components/Overlay';
 import WonDisplay from './components/WonDisplay';
-import NamePopup from './components/NamePopup';
+import Name from './components/Name';
 import Leaderboard from './components/Leaderboard';
+import Popup from './components/Popup';
 
 import whereWaldoImage from './assets/where-waldo-1.jpeg';
 
@@ -66,7 +67,7 @@ const App = () => {
     <div className="App">
       {isDisplayingStatus && <Status text={statusText} />}
       {isWon && <WonDisplay seconds={seconds} />}
-      {!isNameSubmitted && <NamePopup handleNameSubmit={handleNameSubmit} />}
+      {!isNameSubmitted && <Popup Component={<Name handleNameSubmit={handleNameSubmit} />} />}
       {showOverlay && <Overlay />}
 
       <div id="header-container">

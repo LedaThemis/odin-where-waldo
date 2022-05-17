@@ -2,15 +2,15 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 
-import NamePopup from '../NamePopup';
+import Name from '../Name';
 
 test('should render label with text', () => {
-  render(<NamePopup />);
+  render(<Name />);
   expect(screen.getByLabelText(/enter your name/i)).toBeVisible();
 });
 
 test('should change input value when typing', () => {
-  render(<NamePopup />);
+  render(<Name />);
 
   userEvent.type(screen.getByLabelText(/enter your name/i), 'iamtypingtext');
 
@@ -20,7 +20,7 @@ test('should change input value when typing', () => {
 test('should call handleNameSubmit with correct value on submit button click', () => {
   const handleNameSubmitMock = jest.fn();
 
-  render(<NamePopup handleNameSubmit={handleNameSubmitMock} />);
+  render(<Name handleNameSubmit={handleNameSubmitMock} />);
 
   userEvent.type(screen.getByLabelText(/enter your name/i), 'iamtypingtext');
   userEvent.click(screen.getByRole('button', { name: /submit/i }));

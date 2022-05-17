@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import '../styles/NamePopup.css';
+import '../styles/Name.css';
 
 const NamePopup = ({ handleNameSubmit }) => {
   const [currentInput, setCurrentInput] = useState('');

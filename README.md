@@ -8,3 +8,8 @@ Technologies used:
 ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
+
+Struggles Faced:
+
+- Trying to make the Markers appear in their correct position, that was something!
+- Validating whether a click was on a correct character or not was definitely a challenge.

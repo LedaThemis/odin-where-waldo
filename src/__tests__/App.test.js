@@ -48,7 +48,7 @@ test('should render Leaderboard component after name submit', async () => {
 
   userEvent.click(screen.getByRole('button', { name: /submit/i }));
 
-  expect(await screen.findByText('Leaderboard')).toBeVisible();
+  expect(await screen.findByText('Leaderboard', { exact: false })).toBeVisible();
 });
 
 test('should render Display component', async () => {

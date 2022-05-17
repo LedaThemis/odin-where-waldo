@@ -74,7 +74,7 @@ const App = () => {
           Component={<Leaderboard />}
           withCloseButton={true}
           closePopup={() => setIsLeaderboardPopupShown(false)}
-          styles={{ paddingBottom: '1rem', zIndex: 2 }}
+          styles={{ padding: '0 1rem 1rem 1rem ', zIndex: 2 }}
         />
       )}
       {!isNameSubmitted && (

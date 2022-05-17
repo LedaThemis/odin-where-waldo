@@ -17,7 +17,7 @@ const Leaderboard = () => {
 
   return (
     <div id="leaderboard--container">
-      <p id="leaderboard--title">Leaderboard</p>
+      <p id="leaderboard--title">Leaderboard (TOP 10)</p>
       <table id="leaderboard">
         <thead>
           <tr>

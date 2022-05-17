@@ -15,7 +15,7 @@ import Leaderboard from './components/Leaderboard';
 
 import whereWaldoImage from './assets/where-waldo-1.jpeg';
 
-import { fetchPositions, fetchLeaderboard } from './helpers/db';
+import { fetchPositions } from './helpers/db';
 import { checkIfWon, handleWin, submitSelection } from './helpers/utils';
 
 const App = () => {
@@ -41,21 +41,11 @@ const App = () => {
   const [isNameSubmitted, setIsNameSubmitted] = useState(false);
   const [name, setName] = useState('');
 
-  const [leaderboardData, setLeaderboardData] = useState([]);
-
   useEffect(() => {
     (async () => {
       const fetchedPositions = await fetchPositions('1');
       setPositionsData(fetchedPositions.sort((a, b) => a.name - b.name));
       setAvailableSelections(fetchedPositions.filter((pos) => pos.id !== 'props'));
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const fetchedLeaderboard = await fetchLeaderboard();
-
-      setLeaderboardData(fetchedLeaderboard);
     })();
   }, []);
 
@@ -82,7 +72,7 @@ const App = () => {
       <div id="header-container">
         <Header isStarted={isStarted} />
         {!isWon && !showOverlay && <Timer seconds={seconds} setSeconds={setSeconds} isStarted={isStarted} />}
-        {!isWon && !showOverlay && <Leaderboard leaderboardData={leaderboardData} />}
+        {!isWon && !showOverlay && <Leaderboard />}
       </div>
 
       {isPopupActive && (

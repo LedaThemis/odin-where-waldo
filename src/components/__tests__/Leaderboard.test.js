@@ -3,22 +3,27 @@ import '@testing-library/jest-dom';
 
 import Leaderboard from '../Leaderboard';
 
-test('should render table', () => {
-  render(<Leaderboard leaderboardData={[]} />);
+import * as db from '../../helpers/db';
+
+test('should render table', async () => {
+  render(<Leaderboard />);
 
   expect(screen.getByRole('table')).toBeVisible();
 });
 
-test('should render Name, Time table headers', () => {
-  render(<Leaderboard leaderboardData={[]} />);
+test('should render Name, Time table headers', async () => {
+  render(<Leaderboard />);
 
   expect(screen.getByRole('columnheader', { name: /name/i })).toBeVisible();
   expect(screen.getByRole('columnheader', { name: /time/i })).toBeVisible();
 });
 
-test('should render rows based on provided data', () => {
-  render(<Leaderboard leaderboardData={[{ id: 1, name: 'John', seconds: 23 }]} />);
+test('should render rows based on provided data', async () => {
+  const fakeLeaderboardData = [{ id: 1, name: 'John', seconds: 23 }];
+  jest.spyOn(db, 'fetchLeaderboard').mockImplementation(() => Promise.resolve(fakeLeaderboardData));
 
-  expect(screen.getByRole('cell', { name: /John/i })).toBeVisible();
-  expect(screen.getByRole('cell', { name: /00:00:23/i })).toBeVisible();
+  render(<Leaderboard />);
+
+  expect(await screen.findByRole('cell', { name: /John/i })).toBeVisible();
+  expect(await screen.findByRole('cell', { name: /00:00:23/i })).toBeVisible();
 });

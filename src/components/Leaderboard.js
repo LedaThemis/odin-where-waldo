@@ -1,7 +1,20 @@
+import { useState, useEffect } from 'react';
+
 import '../styles/Leaderboard.css';
 import { getHumanReadableTime } from '../helpers/utils';
+import { fetchLeaderboard } from '../helpers/db';
 
-const Leaderboard = ({ leaderboardData }) => {
+const Leaderboard = () => {
+  const [leaderboardData, setLeaderboardData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedLeaderboard = await fetchLeaderboard();
+
+      setLeaderboardData(fetchedLeaderboard);
+    })();
+  }, []);
+
   return (
     <div id="leaderboard--container">
       <p id="leaderboard--title">Leaderboard</p>

@@ -73,7 +73,11 @@ const App = () => {
       <div id="header-container">
         <Header isStarted={isStarted} />
         {!isWon && !showOverlay && <Timer seconds={seconds} setSeconds={setSeconds} isStarted={isStarted} />}
-        {!isWon && !showOverlay && <Leaderboard />}
+        {!isWon && !showOverlay && (
+          <div id="header--leaderboard">
+            <Leaderboard />
+          </div>
+        )}
       </div>
 
       {isPopupActive && (
